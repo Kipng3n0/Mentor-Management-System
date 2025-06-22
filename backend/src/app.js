@@ -9,6 +9,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import './utils/reminderScheduler.js';
+import adRoutes from "./routes/adRoutes.js";
+
 
 const app = express();
 
@@ -87,6 +89,7 @@ app.use("/auth", authRoutes);
 app.use("/mentorships", mentorshipRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/achievements", achievementRoutes);
+app.use("/api/ads", adRoutes);
 app.use("/appointments", appointmentsRoutes);
 
 export { app };
