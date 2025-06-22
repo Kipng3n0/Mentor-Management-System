@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.0",
+    "multer": "^2.0.1",
+    "node-cron": "^4.1.1",
+    "nodemailer": "^7.0.3",
+    "nodemon": "^3.1.10"
+  },
+  "name": "exclusive-mentor-mentee-platform",
+  "version": "1.0.0",
+  "description": "<p>This project is a comprehensive platform that facilitates mentor-mentee interactions through various features including role-based authentication, appointment scheduling, feedback management, and achievement tracking. The platform is built using a robust backend API and a user-friendly frontend, offering different functionalities for mentors and mentees.</p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
