@@ -17,6 +17,8 @@ import MenteesAchievement from "./pages/mentor/MenteesAchievement";
 import ViewFeedback from "./pages/mentor/ViewFeedback";
 import ViewAppointment from "./components/Appointments/ViewAppointment";
 import ViewAchievements from "./components/Achievements/ViewAchievements";
+import CreateAd from "./pages/mentor/CreateAd";
+
 
 const App = () => {
   return (
@@ -81,6 +83,11 @@ const App = () => {
             </PrivateRoute>
           }
         />
+
+        <Route 
+          path="/mentor/create-ad" 
+          element={<CreateAd />}
+         />
 
         <Route
           path="/mentor/feedback"
@@ -149,13 +156,10 @@ const App = () => {
         {/* ---------------- Default Route ---------------- */}
         <Route
           path="*"
-          element={
-            <div className="text-center mt-10">KIPNGENO (frontend)</div>
-          }
+          element={<div className="text-center mt-10">KIPNGENO (frontend)</div>}
         />
       </Routes>
     </div>
-    
   );
 };
 
