@@ -4,7 +4,7 @@ export const createAd = async (req, res) => {
   try {
     const ad = await Ad.create({
       ...req.body,
-      userId: req.user.id, // ✅ Add userId from auth middleware
+      userId: req.user.id, //Add userId from auth middleware
     });
     res.status(201).json(ad);
   } catch (err) {
@@ -13,7 +13,6 @@ export const createAd = async (req, res) => {
 };
 
 
-// GET /ads
 // GET /ads?profession=...&location=...&availability=...
 export const getAllAds = async (req, res) => {
   try {
