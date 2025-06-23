@@ -14,3 +14,14 @@ export const createAd = async (adData, token) => {
     throw error.response?.data?.message || "Ad creation failed";
   }
 };
+export const searchAds = async (filters) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/ads`, {
+      params: filters,
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || "Search failed";
+  }
+};
+  

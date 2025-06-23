@@ -18,7 +18,7 @@ import ViewFeedback from "./pages/mentor/ViewFeedback";
 import ViewAppointment from "./components/Appointments/ViewAppointment";
 import ViewAchievements from "./components/Achievements/ViewAchievements";
 import CreateAd from "./pages/mentor/CreateAd";
-
+import SearchAds from "./pages/mentee/SearchAds";
 
 const App = () => {
   return (
@@ -84,10 +84,7 @@ const App = () => {
           }
         />
 
-        <Route 
-          path="/mentor/create-ad" 
-          element={<CreateAd />}
-         />
+        <Route path="/mentor/create-ad" element={<CreateAd />} />
 
         <Route
           path="/mentor/feedback"
@@ -116,6 +113,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/mentee/search-ads" element={<SearchAds />} />
 
         <Route
           path="/mentee/achievements"

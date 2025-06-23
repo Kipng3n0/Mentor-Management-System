@@ -78,16 +78,18 @@ const Sidebar = ({ role }) => {
               </li>
             )}
             {/* Create Ad (Mentor only) */}
-            <li>
-              <Link
-                to="/mentor/create-ad"
-                className="flex items-center text-white p-2 rounded-lg hover:bg-indigo-600 transition"
-                onClick={() => setIsOpen(false)}
-              >
-                <FaClipboardList className="text-xl mr-3" />
-                <span>Create Ad</span>
-              </Link>
-            </li>
+            {role === "mentor" && (
+              <li>
+                <Link
+                  to="/mentor/create-ad"
+                  className="flex items-center text-white p-2 rounded-lg hover:bg-indigo-600 transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FaClipboardList className="text-xl mr-3" />
+                  <span>Create Ad</span>
+                </Link>
+              </li>
+            )}
 
             {/* Your Mentee (Mentor only) */}
             {role === "mentor" && (
@@ -99,6 +101,19 @@ const Sidebar = ({ role }) => {
                 >
                   <FaChalkboardTeacher className="text-xl mr-3" />
                   <span>Your Mentee</span>
+                </Link>
+              </li>
+            )}
+            {/* Search Ads (Mentee only) */}
+            {role === "mentee" && (
+              <li>
+                <Link
+                  to="/mentee/search-ads"
+                  className="flex items-center text-white p-2 rounded-lg hover:bg-purple-600 transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FaClipboardList className="text-xl mr-3" />
+                  <span>Search Ads</span>
                 </Link>
               </li>
             )}
