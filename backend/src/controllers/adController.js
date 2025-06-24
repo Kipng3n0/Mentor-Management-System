@@ -12,16 +12,15 @@ export const createAd = async (req, res) => {
   }
 };
 
-
 // GET /ads?profession=...&location=...&availability=...
 export const getAllAds = async (req, res) => {
   try {
     const { profession, location, availability } = req.query;
 
     const query = {};
-    if (profession) query.profession = new RegExp(profession, 'i'); // case-insensitive
-    if (location) query.location = new RegExp(location, 'i');
-    if (availability) query.availability = new RegExp(availability, 'i');
+    if (profession) query.profession = new RegExp(profession, "i"); // case-insensitive
+    if (location) query.location = new RegExp(location, "i");
+    if (availability) query.availability = new RegExp(availability, "i");
 
     const ads = await Ad.find(query).populate("userId", "name email");
     res.json(ads);

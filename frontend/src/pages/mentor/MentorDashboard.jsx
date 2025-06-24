@@ -10,18 +10,26 @@ const MentorDashboard = () => {
       try {
         const data = await fetchAppointments();
         const currentDateTime = new Date();
-        // Filter and sort appointments
+        const userId = localStorage.getItem("userId");
+
+        // Filter only appointments for this mentor and in the future
         const upcomingAppointments = data
-          .filter((appointment) => new Date(appointment.date) >= currentDateTime)
+          .filter(
+            (appointment) =>
+              appointment.receiver?._id === userId &&
+              new Date(appointment.date) >= currentDateTime
+          )
           .sort((a, b) => new Date(a.date) - new Date(b.date)); // Sort by closest date
+
         setAppointments(upcomingAppointments);
       } catch (error) {
-        console.error('Error fetching appointments:', error);
+        console.error("Error fetching appointments:", error);
       }
     };
+
     getAppointments();
   }, []);
-
+  
   const handleAction = async (id, status) => {
     try {
       await updateAppointmentStatus(id, status);

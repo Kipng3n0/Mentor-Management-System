@@ -30,11 +30,12 @@ const Login = () => {
   // Form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const payload = { ...formData, role: userRole };
+    console.log("Login payload:", payload); // ✅ ADD THIS LINE
 
     try {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
       const response = await axios.post(`${API_BASE_URL}/auth/login`, payload);
 
       const { accessToken, refreshToken, role } = response.data;
@@ -44,21 +45,20 @@ const Login = () => {
         return;
       }
 
-      // Save tokens and role to localStorage
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("role", role);
 
-      // Redirect based on role
       navigate(`/${role}/dashboard`);
     } catch (error) {
       setMessage(
         error.response?.data?.message || "Login failed. Please try again."
       );
     } finally {
-      setIsLoading(false); // Stop loading
+      setIsLoading(false);
     }
   };
+  
 
   // Image Carousel: Auto-advance slides
   useEffect(() => {

@@ -4,29 +4,31 @@ const API_URL = `${import.meta.env.VITE_API_BASE_URL}/appointments`;
 
 // Create a new appointment (either as mentee or mentor)
 export const submitAppointment = async (formData) => {
-  const { date, time, reason, mentee, mentor } = formData;
-  const receiverId = mentee || mentor; // Set the receiver as mentee or mentor based on role
+  const { date, time, reason, adId } = formData; 
 
   try {
     const response = await axios.post(
       API_URL,
       {
+        adId, 
         date,
         time,
         reason,
-        receiverId,
       },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       }
     );
     return response.data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || 'Error creating appointment');
+    throw new Error(
+      error.response?.data?.message || "Error creating appointment"
+    );
   }
 };
+
 // Get appointments for the current user
 export const fetchAppointments = async () => {
   try {

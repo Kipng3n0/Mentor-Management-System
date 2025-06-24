@@ -85,11 +85,11 @@ app.get("/", (req, res) => {
   res.send("MentorMentee Platform API");
 });
 
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/mentorships", mentorshipRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/achievements", achievementRoutes);
 app.use("/api/ads", adRoutes);
-app.use("/appointments", appointmentsRoutes);
+app.use("/api/appointments", appointmentsRoutes);
 
 export { app };

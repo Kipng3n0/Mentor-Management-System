@@ -28,17 +28,17 @@ const SearchAds = () => {
       setLoading(false);
     }
   };
-  const handleRequestAppointment = async (mentorId) => {
+  const handleRequestAppointment = async (ad) => {
     const confirmed = window.confirm(
       "Do you want to request an appointment with this mentor?"
     );
     if (!confirmed) return;
 
     const appointmentData = {
-      date: new Date().toISOString().slice(0, 10), // today’s date
-      time: "10:00", // or use a date picker later
-      reason: "Interested in mentorship", // or prompt the user
-      mentor: mentorId,
+      adId: ad._id, 
+      date: new Date().toISOString().slice(0, 10),
+      time: "10:00",
+      reason: "Interested in mentorship",
     };
 
     try {
@@ -113,7 +113,7 @@ const SearchAds = () => {
                   Mentor: {ad.userId?.name} ({ad.userId?.email})
                 </p>
                 <button
-                  onClick={() => handleRequestAppointment(ad.userId._id)}
+                  onClick={() => handleRequestAppointment(ad)}
                   className="mt-3 bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded"
                 >
                   Request Appointment

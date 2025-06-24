@@ -1,33 +1,47 @@
 import Appointment from '../models/Appointment.js';
 import User from '../models/User.js';
+import Ad from '../models/Ad.js';
 
-// Create a new appointment
+
+// Create a new appointment (via ad)
 export const createAppointment = async (req, res) => {
-  const { date, time, reason, receiverId } = req.body;
+  const { adId, date, time, reason } = req.body;
 
   try {
-    const senderId = req.user.id; // Extract sender ID from authenticated user
+    const menteeId = req.user.id;
 
-    const receiver = await User.findById(receiverId);
-    if (!receiver) {
-      return res.status(404).json({ message: 'Receiver not found' });
+    // 1. Get the ad
+    const ad = await Ad.findById(adId).populate("userId"); // optional populate
+
+    if (!ad) {
+      return res.status(404).json({ message: "Ad not found" });
     }
 
+    const mentorId = ad.userId?._id || ad.userId;
+
+    //3. Save the appointment using mentorId as receiver
     const newAppointment = new Appointment({
       date,
       time,
       reason,
-      sender: senderId,
-      receiver: receiverId,
+      sender: req.user.id,
+      receiver: mentorId,
     });
 
     await newAppointment.save();
-    res.status(201).json({ message: 'Appointment created successfully', appointment: newAppointment });
+
+    res.status(201).json({
+      message: 'Appointment created successfully',
+      appointment: newAppointment,
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error creating appointment', error: error.message });
+    console.error("Error creating appointment:", error);
+    res.status(500).json({
+      message: 'Error creating appointment',
+      error: error.message,
+    });
   }
 };
-
 // Get appointments for the authenticated user
 export const getAppointments = async (req, res) => {
   const userId = req.user.id;

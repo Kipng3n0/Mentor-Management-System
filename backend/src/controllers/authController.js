@@ -3,16 +3,17 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+
 // Register a new user
 export const registerUser = async (req, res) => {
   const { username, email, password, role } = req.body;
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+   const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
       username,
       email,
-      password:hashedPassword,
+      password: hashedPassword,
       role,
     });
 
@@ -24,9 +25,10 @@ export const registerUser = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ success: false, message: "Error registering user", error });
+      .json({ success: false, message: "Error registering user", error: error.message });
   }
 };
+
 
 // Login a user
 export const loginUser = async (req, res) => {
@@ -44,6 +46,7 @@ export const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
+
 
     // Check if the role matches
     if (user.role !== role) {
@@ -96,4 +99,6 @@ export const refreshToken = async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: "Invalid or expired refresh token", error });
   }
+
+
 };

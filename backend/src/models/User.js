@@ -40,13 +40,13 @@ const userSchema = new mongoose.Schema(
 );
 
 // Pre-save middleware to hash password on new or modified passwords
-userSchema.pre("save", async function (next) {
+/*userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
   this.password = await bcrypt.hash(this.password, 10);
   next();
-});
+});*/
 
 // Pre-update middleware to hash password if it's modified in an update operation
 userSchema.pre("findOneAndUpdate", async function (next) {
